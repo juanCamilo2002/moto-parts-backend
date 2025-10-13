@@ -1,7 +1,18 @@
+# --- Core Django ---
 Django>=4.1,<5
+
+# --- Django REST Framework ---
 djangorestframework>=3.14
 djangorestframework-simplejwt>=5.2
+
+# --- Database ---
 psycopg2-binary
+
+# --- Utilities ---
 django-cors-headers
 python-dotenv
 Pillow
+
+# --- Testing ---
+pytest>=8.3.0
+pytest-django>=4.8.0
