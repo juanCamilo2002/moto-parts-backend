@@ -138,10 +138,6 @@ SPECTACULAR_SETTINGS = {
     'COMPONENT_SPLIT_REQUEST': True,
     'SCHEMA_PATH_PREFIX': '/api',
     'SORT_OPERATIONS': True,
-    'TAGS': [
-        {'name': 'Auth', 'description': 'Operaciones de autenticación (registro, login, logout).'},
-        {'name': 'Catálogo', 'description': 'CRUD de productos disponibles en el catálogo.'},
-    ],
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

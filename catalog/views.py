@@ -5,14 +5,14 @@ from .models import Product, Category, Brand
 from .serializers import ProductSerializer, CategorySerializer, BrandSerializer
 from .permissions import IsAuthenticatedReadAndAdminWrite
 
-@extend_schema(tags=["Catálogo"], summary="Gestión de categorías")
+@extend_schema(tags=["Categorias"], summary="Gestión de categorías")
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = (IsAuthenticatedReadAndAdminWrite, )
 
 
-@extend_schema(tags=["Catálogo"], summary="Gestión de marcas")
+@extend_schema(tags=["Marcas"], summary="Gestión de marcas")
 class BrandViewSet(viewsets.ModelViewSet):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
@@ -20,7 +20,7 @@ class BrandViewSet(viewsets.ModelViewSet):
 
 
 @extend_schema(
-    tags=["Catálogo"],
+    tags=["Productos"],
     summary="Gestionar productos del catálogo",
     description="Permite listar, crear, actualizar y eliminar productos del catálogo. Solo los administradores pueden modificar datos.",
 )
