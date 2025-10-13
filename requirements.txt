@@ -12,6 +12,7 @@ psycopg2-binary
 django-cors-headers
 python-dotenv
 Pillow
+drf-spectacular>=0.28.0
 
 # --- Testing ---
 pytest>=8.3.0

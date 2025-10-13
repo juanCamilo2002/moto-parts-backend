@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
 
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    'catalog.apps.CatalogConfig'
 
 ]
 
