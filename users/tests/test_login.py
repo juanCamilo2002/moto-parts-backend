@@ -8,7 +8,7 @@ def test_login_returns_access_and_refresh_tokens():
     user = User.objects.create_user(email="juan@example.com", password="test1234")
     client = APIClient()
 
-    url = reverse('token_obtain_pair')
+    url = reverse('users:token_obtain_pair')
     response = client.post(url, {"email": "juan@example.com", "password": "test1234"})
 
     assert response.status_code == 200
