@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'drf_spectacular',
 
     'users.apps.UsersConfig',
-    'catalog.apps.CatalogConfig'
+    'catalog.apps.CatalogConfig',
+    'customers.apps.CustomersConfig',
 
 ]
 
