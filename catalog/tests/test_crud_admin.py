@@ -2,6 +2,7 @@ import pytest
 from rest_framework.test import APIClient
 from rest_framework_simplejwt.tokens import RefreshToken
 from users.models import User
+from catalog.models import Brand, Category
 from django.urls import reverse
 
 @pytest.mark.django_db
@@ -11,11 +12,16 @@ def test_admin_can_crud_products():
     client = APIClient()
     client.credentials(HTTP_AUTHORIZATION=f'Bearer {refresh.access_token}')
 
+    brand = Brand.objects.create(name="Michelin", country="France")
+    category = Category.objects.create(name="Llantas", description="Llantas para vehiculos")
+
     list_url = reverse('catalog:product-list')
     create_response = client.post(list_url, {
         "name": "Llanta Michelin",
         "price": 250000,
-        "stock": 8
+        "stock": 8,
+        "brand_id": brand.id,
+        "category_id": category.id
     }, format="json")
 
     assert create_response.status_code == 201

@@ -1,9 +1,23 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets
 from rest_framework.response import Response
-from .models import Product
-from .serializers import ProductSerializer
+from .models import Product, Category, Brand
+from .serializers import ProductSerializer, CategorySerializer, BrandSerializer
 from .permissions import IsAuthenticatedReadAndAdminWrite
+
+@extend_schema(tags=["Catálogo"], summary="Gestión de categorías")
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = (IsAuthenticatedReadAndAdminWrite, )
+
+
+@extend_schema(tags=["Catálogo"], summary="Gestión de marcas")
+class BrandViewSet(viewsets.ModelViewSet):
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializer
+    permission_classes = (IsAuthenticatedReadAndAdminWrite, )
+
 
 @extend_schema(
     tags=["Catálogo"],
