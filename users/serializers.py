@@ -30,3 +30,6 @@ class LoginSerializer(serializers.Serializer):
             raise serializers.ValidationError('Usuario inactivo')
         data['user'] = user
         return data
+    
+class LogoutSerializer(serializers.Serializer):
+    refresh = serializers.CharField(required=True, help_text="Token de actualización (refresh token)")
