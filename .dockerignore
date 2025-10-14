@@ -1,0 +1,64 @@
+# --- Archivos y carpetas del sistema ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.db
+*.sqlite3
+*.log
+*.pot
+*.pyc
+
+# --- Entorno virtual ---
+venv/
+.env/
+.env.local
+.env.*.backup
+
+# --- Archivos temporales ---
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig
+*.old
+
+# --- Archivos de configuración de IDEs ---
+.vscode/
+.idea/
+*.iml
+
+# --- Archivos de sistema operativo ---
+.DS_Store
+Thumbs.db
+
+# --- Archivos de dependencias ---
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# --- Archivos de media y estáticos ---
+media/
+staticfiles/
+static/
+
+# --- Archivos de test ---
+.pytest_cache/
+.coverage
+htmlcov/
+tests/__pycache__/
+*.pytest_cache/
+
+# --- Archivos de build ---
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# --- Archivos de Docker ---
+Dockerfile
+docker-compose.yml
+
+# --- Archivos de documentación ---
+docs/
