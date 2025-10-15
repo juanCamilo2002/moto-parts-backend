@@ -63,6 +63,12 @@ Incluye autenticación JWT, gestión de usuarios, catálogo de productos, catego
    ```bash
    docker-compose up --build
    ```
+3. **variables de entornos extras (Dokcer) pgadmin**
+   ```bash
+   # credentials pgadmin (Docker)
+   PGADMIN_EMAIL=admin@gmail.com  
+   PGADMIN_PASSWORD=admin1234
+   ```
 3. **El backend estará disponible en:**
 
    👉 http://localhost:8000
@@ -80,6 +86,23 @@ Una vez en ejecución, puedes acceder a la documentación generada automáticame
 | `auth`      | Registro, login, logout y perfil de usuario autenticado.        |
 | `catalog`   | CRUD de productos, marcas y categorías.                         |
 | `customers` | Gestión de clientes (personas naturales o empresas).            |
+| `orders` | Gestión de pedidos y carrito de compras (`Cart`, `CartItem`, `Order`).            |
+
+## 🛒 Módulo de Pedidos y Carrito
+**Funcionalidades:**
+
+* Creación y gestión de carritos por cliente.
+* Agregar, eliminar o listar productos en el carrito.
+* Creación de órdenes con múltiples productos (`Order` y `OrderItem`).`
+
+
+| Endpoint             | Método  | Descripción                                               |
+| -------------------- | ------- | --------------------------------------------------------- |
+| `/api/orders/carts/` | `POST`  | Crear carrito con productos                               |
+| `/api/orders/`       | `POST`  | Crear orden con items                                     |
+| `/api/orders/`       | `GET`   | Listar órdenes del vendedor                               |
+| `/api/orders/{id}/`  | `PATCH` | Actualizar estado de orden (`PENDING`, `COMPLETED`, etc.) |
+
 
 ## 🧪 Pruebas automáticas
 Para ejecutar todos los tests con `pytest`
@@ -87,6 +110,26 @@ Para ejecutar todos los tests con `pytest`
    pytest -v
    ````
 Puedes usar `pytest --disable-warnings` para una salida más limpia
+
+## 🌱 Seeders (Datos iniciales)
+El proyecto incluye seeders divididos por módulo para poblar la base de datos con datos de prueba.
+
+**Comandos disponibles:**
+
+```bash
+# sin docker 
+python manage.py seed_users
+python manage.py seed_customers
+python manage.py seed_catalog
+python manage.py seed_all
+
+# con docker
+docker exec -it python manage.py seed_users
+docker exec -it python manage.py seed_customers
+docker exec -it python manage.py seed_catalog
+docker exec -it python manage.py seed_all
+```
+`seed_all ejecuta todos los seeders en order (usuarios → clientes → catálogo )`
 
 ## 🔐 Autenticación
 El sistema utiliza **JWT (JSON Web Tokens)** con el paquete `djangorestframework-simplejwt`.
