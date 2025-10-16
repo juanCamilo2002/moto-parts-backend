@@ -18,7 +18,7 @@ class CartItemSerializer(serializers.ModelSerializer):
         fields = ['id', 'product', 'product_id', 'quantity']
 
 class CartSerializer(serializers.ModelSerializer):
-    items = CartItemSerializer(many=True, write_only=True)
+    items = CartItemSerializer(many=True, write_only=True, required=False)
     items_detail = CartItemSerializer(source='items', many=True, read_only=True)
     customer_id = serializers.PrimaryKeyRelatedField(
         queryset= Customer.objects.all(),
