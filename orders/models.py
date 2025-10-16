@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from catalog.models import Product
 from customers.models import Customer
+from decimal import Decimal
 
 class Cart(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='carts')
@@ -11,6 +12,12 @@ class Cart(models.Model):
 
     def __str__(self):
         return f'Cart #{self.id} - {self.customer}'
+    
+    def get_total(self):
+        total = Decimal("0.00")
+        for item in self.items.all():
+            total += item.product.price * item.quantity
+        return total
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
