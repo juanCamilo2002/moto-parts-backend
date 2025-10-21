@@ -6,6 +6,7 @@ from drf_spectacular.utils import extend_schema
 from .models import Cart,  Order
 from .serializers import CartSerializer, OrderSerializer
 from catalog.models import Product
+from customers.models import Customer
 
 @extend_schema(tags=['Pedidos'], summary="Gestión del carrito de compras")
 class CartViewSet(viewsets.ModelViewSet):
@@ -14,6 +15,25 @@ class CartViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Cart.objects.filter(is_active=True)
+    
+    @action(detail=False, methods=['get'], url_path='active-carts')
+    def active_carts(self, request):
+        """
+        Devuelve (o crea) los carritos activos de todos los clientes.
+        Si un cliente no tiene carrito activo, se crea automáticamente
+        """
+        customers = Customer.objects.all()
+        active_carts = []
+
+        for customer in customers:
+            cart, created = Cart.objects.get_or_create(
+                customer=customer,
+                is_active=True
+            )
+            active_carts.append(cart)
+        
+        serializer = self.get_serializer(active_carts, many=True)
+        return Response(serializer.data)
     
     @action(detail=False, methods=['get'], url_path='current/(?P<customer_id>[^/.]+)')
     def current_cart(self, request, customer_id=None):
